@@ -58,10 +58,10 @@ class Slug extends Text
         $urlToSlug = $this->getUriToSlug();
 
         if ($urlToSlug) {
-            $urlToSlug .= '/';
+            $urlToSlug = '/' . trim($urlToSlug, '/');
         }
 
-        $slugHashed = 'preview-'.sha1(config('arbory.preview.slug_salt').'/'.$urlToSlug.$this->getValue());
+        $slugHashed = 'preview-' . sha1(config('arbory.preview.slug_salt') . $urlToSlug . '/' . $this->getValue());
 
         return url($slugHashed);
     }
