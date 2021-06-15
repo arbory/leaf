@@ -4,7 +4,7 @@ namespace Arbory\Base\Repositories;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 use RuntimeException;
 use Arbory\Base\Files\ArboryFile;
 use Illuminate\Http\UploadedFile;
@@ -156,7 +156,7 @@ class ArboryFilesRepository extends AbstractModelsRepository
             'sha1' => sha1_file($realPath),
             'original_name' => $file->getClientOriginalName(),
             'local_name' => $localFileName,
-            'size' => $file->getClientSize(),
+            'size' => $file->getSize(),
             'owner_id' => $owner->getKey(),
             'owner_type' => $owner->getMorphClass(),
         ];

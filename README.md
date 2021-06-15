@@ -7,7 +7,7 @@
 ## Installation
 #### Create new Laravel project
 ```bash
-composer create-project --prefer-dist laravel/laravel=5.8 my-project
+composer create-project --prefer-dist laravel/laravel=8.0 my-project
 ```
 
 #### Go to project root

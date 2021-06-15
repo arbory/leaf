@@ -47,21 +47,21 @@ class ContentTypeRegister
 
     /**
      * @param Node $parent
-     * @return \Illuminate\Support\Collection|\string[]
+     * @return Collection
      */
-    public function getAllowedChildTypes(Node $parent)
+    public function getAllowedChildTypes(Node $parent): Collection
     {
-        if (method_exists($parent->content, 'getAllowedChildTypes')) {
-            $allowed = $parent->content->getAllowedChildTypes($parent, $this->getAllContentTypes());
-
-            if (is_array($allowed)) {
-                $allowed = new Collection($allowed);
-            }
-
-            return $this->mapToDefinitions($allowed);
+        if (! $parent->content || ! method_exists($parent->content, 'getAllowedChildTypes')) {
+            return $this->getAllContentTypes();
         }
 
-        return $this->getAllContentTypes();
+        $allowed = $parent->content->getAllowedChildTypes($parent, $this->getAllContentTypes());
+
+        if (is_array($allowed)) {
+            $allowed = new Collection($allowed);
+        }
+
+        return $this->mapToDefinitions($allowed);
     }
 
     /**
@@ -82,29 +82,17 @@ class ContentTypeRegister
     }
 
     /**
-     * @param Collection|array $mappable
-     * @return Collection|array
+     * @param Collection $mappable
+     * @return Collection
      */
-    protected function mapToDefinitions($mappable)
+    protected function mapToDefinitions(Collection $mappable): Collection
     {
-        if ($mappable instanceof Collection) {
-            return $mappable->mapWithKeys(function ($item) {
-                if ($item instanceof ContentTypeDefinition) {
-                    return $item;
-                }
-
-                return [$item => $this->findByModelClass($item)];
-            });
-        }
-
-        foreach ($mappable as &$item) {
+        return $mappable->mapWithKeys(function ($item) {
             if ($item instanceof ContentTypeDefinition) {
                 return $item;
             }
 
-            $item = $this->findByModelClass($item);
-        }
-
-        return $mappable;
+            return [$item => $this->findByModelClass($item)];
+        });
     }
 }

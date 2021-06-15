@@ -3,7 +3,6 @@
     xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/6.1/phpunit.xsd"
     bootstrap="tests/bootstrap.php"
     colors="true"
-    printerClass="DiabloMedia\PHPUnit\Printer\PrettyPrinter"
 >
     <logging>
         <log type="coverage-html" target="tests/coverage/html" />

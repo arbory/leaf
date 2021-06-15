@@ -2,7 +2,7 @@
 
 namespace Arbory\Base\Console\Commands;
 
-use ArboryDatabaseSeeder;
+use Database\Seeders\ArboryDatabaseSeeder;
 use Illuminate\Console\Command;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;

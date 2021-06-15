@@ -2,9 +2,9 @@
 
 namespace Arbory\Base\Nodes;
 
-use Alsofronie\Uuid\UuidModelTrait;
 use Arbory\Base\Pages\PageInterface;
 use Baum\NestedSet\Node as BaumNode;
+use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Arbory\Base\Repositories\NodesRepository;
@@ -12,12 +12,29 @@ use Arbory\Base\Support\Activation\HasActivationDates;
 
 /**
  * Class Node.
+ *
+ * @property Model|null $content
+ * @property string $name
+ * @property string $id
+ * @property string $content_type
+ * @property string $slug
+ * @property bool $active
  */
 class Node extends Model
 {
-    use UuidModelTrait;
+    use Uuid;
     use HasActivationDates;
     use BaumNode;
+
+    /**
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
+     * @var string
+     */
+    protected $keyType = 'string';
 
     /**
      * @var string

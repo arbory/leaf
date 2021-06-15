@@ -3,13 +3,12 @@
 namespace Arbory\Base\Console\Commands;
 
 use Exception;
-use ArboryDatabaseSeeder;
+use Database\Seeders\ArboryDatabaseSeeder;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Database\DatabaseManager;
 use Arbory\Base\Providers\ArboryServiceProvider;
-use Illuminate\Console\DetectsApplicationNamespace;
 use Arbory\Base\Providers\FileManagerServiceProvider;
 
 /**
@@ -17,7 +16,7 @@ use Arbory\Base\Providers\FileManagerServiceProvider;
  */
 class InstallCommand extends Command
 {
-    use ConfirmableTrait, DetectsApplicationNamespace;
+    use ConfirmableTrait;
 
     /**
      * @var string
